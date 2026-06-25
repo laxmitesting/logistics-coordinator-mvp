@@ -1,0 +1,8 @@
+# Network requests to OpenRouteService
+requests
+
+# Environment variable management
+python-dotenv
+
+# Testing framework
+pytest

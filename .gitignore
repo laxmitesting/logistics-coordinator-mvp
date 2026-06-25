@@ -1,0 +1,19 @@
+# Security
+.env
+
+# Virtual Environments
+.venv/
+venv/
+
+# Python Cache & Build files
+__pycache__/
+*.pyc
+.pytest_cache/
+logistics.egg-info/
+
+# Local Application Data
+latest_plan.json
+
+# OS Junk Files
+.DS_Store
+Thumbs.db
