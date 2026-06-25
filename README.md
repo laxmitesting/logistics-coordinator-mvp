@@ -1,20 +1,19 @@
-Logistics coordinator MVP
-This is a simple Python MVP for a logistics coordinator agent built with:
-- an OpenAI-compatible chat completions endpoint
-- openrouteservice (ORS) for geocoding, matrix, and directions
-- driver/vehicle/order constraints 
-- route planning function with dispatch plan 
-Inspired by - https://docs.cloud.google.com/architecture/agentic-ai-system-with-grounding-using-maps
+Markdown
+# Logistics Coordinator CLI
 
-Files Structure
+An AI-powered command-line interface for intelligent route planning and dispatch coordination.
+
+## 📂 Project Structure
+
+```text
 logistics-coordinator/
 ├─ README.md
-├─ .env                
-├─ .env.example        
+├─ .env
+├─ .env.example
 ├─ requirements.txt
-├─ cli.py              
+├─ cli.py
 ├─ src/
-│  └─ logistics/       
+│  └─ logistics/
 │     ├─ __init__.py
 │     ├─ config.py
 │     ├─ domain.py
@@ -22,42 +21,26 @@ logistics-coordinator/
 │     ├─ planner.py
 │     ├─ agent.py
 │     └─ render.py
-└─ tests/              
+└─ tests/
    ├─ __init__.py
    ├─ test_agent.py
    ├─ test_config.py
    ├─ test_domain.py
    └─ test_geo.py
 
-Files
-cli.py for simple commands like plan, show-plan, and show-map.
-config.py: sample depot, drivers, vehicles, and orders.
-domain.py for data models: Driver, Vehicle, Order, RoutePlan.
-planner.py for deterministic constraint logic: capacity, skills, stop limits, time windows, and route assignment.
-geo.py for ORS wrappers: geocode, matrix, directions, and optional optimization. ORS supports capacities, time windows, skills, and service duration in its optimization model.
-agent.py for the OpenAI-compatible tool loop.
-render.py for console output
+📄 File Overview
+Core Application
+cli.py: The front-door application router for commands like plan, show-plan, and show-map.
 
-Setup
-Create a virtual environment.
+config.py: Stores the static definitions for the sample depot, available drivers, vehicles, and daily orders.
 
-Install dependencies:
+domain.py: Establishes the core data models (Driver, Vehicle, Order, RoutePlan).
 
-bash
-pip install -r requirements.txt
-Copy .env.example to .env and fill in values.
+render.py: Translates raw JSON routing data into human-readable terminal schedules and ASCII maps.
 
+Routing & AI Logic
+agent.py: Manages the OpenAI-compatible tool loop, allowing the AI to interface with the routing engine.
 
-Commands
-Create a new plan:
-bash
-python cli.py plan
-Show the latest stored plan:
-bash
-python cli.py show-plan
+planner.py: Orchestrates deterministic constraint logic, actively managing capacity, driver skills, stop limits, time windows, and final route assignments.
 
-The MVP models:  
-- drivers with skills, availability, and shift windows
-- vehicles with capacity and stop limits
-- orders with amounts, required skills, service durations, and delivery time windows
-- a dispatch planner that checks these constraints before building routes
+geo.py: Provides robust wrappers for the OpenRouteService (ORS) API. Handles geocoding, distance matrices, directions, and the core optimization model (supporting capacities, time windows, skills, and service durations).
