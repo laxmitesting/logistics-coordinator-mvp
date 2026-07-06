@@ -21,6 +21,10 @@ def render_ascii_map(coords: List[Tuple[float, float]], labels: List[str], width
 
 def route_lines(plan: Dict) -> List[str]:
     lines = []
+    depot = plan.get("depot")
+    if depot:
+        lines.append(f"🏢 DEPOT: {depot['name']} ({depot['address']})")
+        lines.append("-" * 42)
     for route in plan.get("routes", []):
         lines.append(f"{route['driver_name']} ({route['vehicle_id']})")
         for stop in route.get("stops", []):

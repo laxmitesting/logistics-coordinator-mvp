@@ -2,20 +2,24 @@
 import argparse
 import json
 import os
+import sys
 from dotenv import load_dotenv
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(BASE_DIR, "src"))
+env_path = os.path.join(BASE_DIR, ".env")
 
 # Load the environment variables
 load_dotenv()
 
+# Import the agent and render modules
 from logistics.agent import build_dispatch_plan_tool
 from logistics.render import route_lines
 
-# Where we will save the plan so 'show-plan' can find it later
 PLAN_FILE = "latest_plan.json"
 
 
 def custom_json_encoder(obj):
-    """A bulletproof translator to teach Python how to save custom objects."""
     # 1. If it is a Pydantic model
     if hasattr(obj, 'model_dump'):
         return obj.model_dump()
